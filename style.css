@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+
+:root {
+    font-size: calc(100vw / 100);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to right, #8a2387, #e94057, #f27121);
+    font-family: 'Gugi', cursive;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+    height: 100vh;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.header--div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    width: 12rem;
+    height: calc(12rem/4);
+}
+
+.title {
+    font-size: 3rem;
+    color: #bfe9ff;
+}
+
+.game--div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.info--div {
+    text-align: center;
+}
+
+.status {
+    font-size: 2rem;
+    color: #bfe9ff;
+}
+
+.score--div {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+}
+
+.score {
+    font-size: 1.5rem;
+    color: #bfe9ff;
+}
+
+.option--div {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.option {
+    height: 15rem;
+    width: 15rem;
+    cursor: pointer;
+}
+
+.option:hover{
+    box-shadow: #e94057 0 0 1rem 1rem;
+}
+
+.option:active {
+    box-shadow: #bfe9ff 0 0 1rem 1rem;
+
+}

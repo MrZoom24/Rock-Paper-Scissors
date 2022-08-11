@@ -1,59 +1,69 @@
+const statusEl = document.querySelector(".status");
+const playerScoreEl = document.querySelector("#playerScore");
+const computerScoreEl = document.querySelector("#computerScore");
+const rockEl = document.querySelector("#rock");
+const paperEl = document.querySelector("#paper");
+const scissorEl = document.querySelector("#scissor");
+
 let playerScore = 0;
-let opponentScore = 0;
+let computerScore = 0;
+
+function playGame() {
+    const playerChoice = this.id;
+    const computerChoice = getComputerChoice();
+
+    if(playerChoice === computerChoice){
+        statusEl.textContent = `Draw! You both chose ${playerChoice}`
+    }else {
+        if(playerChoice === "rock"){
+            if(computerChoice === "scissor"){
+                statusEl.textContent = `You win this round! Rock beats scissor`;
+                playerScore++;
+            }else {
+                statusEl.textContent =  `You lose this round! Paper beats rock`;
+                computerScore++;
+            }
+        }else if(playerChoice === "paper"){
+            if(computerChoice === "rock"){
+                statusEl.textContent = "You win this round! Paper beats rock";
+                playerScore++;
+            }else {
+                statusEl.textContent = "You lose this round! Scissor beats paper";
+                computerScore++;
+            }
+        }else {
+            if(computerChoice === "paper"){
+                statusEl.textContent = "You win this round! Scissor beats paper";
+                playerScore++;
+            }else {
+                statusEl.textContent = "You lose this round! Rock beats scissor";
+                computerScore++;
+            }
+        }
+    }
+
+    playerScoreEl.textContent = `Your score is: ${playerScore}`;
+    computerScoreEl.textContent = `Computer score is: ${computerScore}`;
+
+    if(playerScore === 5 || computerScore === 5){
+        rockEl.removeEventListener("click", playGame);
+        paperEl.removeEventListener("click", playGame);
+        scissorEl.removeEventListener("click", playGame);
+
+        if(playerScore === 5){
+            statusEl.innerHTML = "You win! Good job! <br> (Refresh page to play again)";
+        }else {
+            statusEl.innerHTML = "You lose! Better luck next time! <br> (Refresh page to play again)";
+        }
+    }
+}
+
+rockEl.addEventListener("click", playGame);
+paperEl.addEventListener("click", playGame);
+scissorEl.addEventListener("click", playGame);
 
 function getComputerChoice() {
     const randomNum = Math.trunc(Math.random() * 3);
-    const choices = ["rock", "paper", "scissors"];
+    const choices = ["rock", "paper", "scissor"];
     return choices[randomNum];
 }
-
-function playRound(playerChoice, computerChoice){
-    playerChoice = playerChoice.toLowerCase();
-    if (playerChoice === computerChoice){
-        return "Draw";
-    }else if (playerChoice === "rock") {
-        if (computerChoice === "paper"){
-            opponentScore++
-            return "You lose: Paper beats Rock";
-        } else {
-            playerScore++
-            return "You win: Rock beats Scissors";
-        }
-    }else if (playerChoice === "paper") {
-        if (computerChoice === "scissors") {
-            opponentScore++
-            return "You lose: Scissors beats Paper";
-        } else {
-            playerScore++
-            return "You win: Paper beats Rock";
-        }
-    }else if (playerChoice === "scissors") {
-        if (computerChoice === "rock") {
-            opponentScore++
-            return "You lose: Rock beats Scissors";
-        } else {
-            playerScore++
-            return "You win: Scissors beats Paper";
-        }
-    }else {
-        return "Invalid choice";
-    }
-}
-
-function game(){
-
-    for(i = 0; i < 5; i++){
-        console.log(playRound(prompt("Your choice:"), getComputerChoice()));
-        console.log(`Your score: ${playerScore} \n Opponent score: ${opponentScore}`)
-    }
-
-    if (playerScore === opponentScore){
-        console.log(`It's a draw! \n Your score: ${playerScore} \n Opponent score: ${opponentScore}`)
-    } else if (playerScore > opponentScore){
-        console.log(`You win! \n Your score: ${playerScore} \n Opponent score: ${opponentScore}`)
-    } else {
-        console.log(`You lose! \n Your score: ${playerScore} \n Opponent score: ${opponentScore}`)
-    }
-}
-
-game()
